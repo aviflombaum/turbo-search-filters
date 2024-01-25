@@ -6,10 +6,9 @@ export default class extends Controller {
   submit(e) {
     const form = e.currentTarget.closest("form");
     const formData = new FormData(form);
-    const url = this.urlValue;
 
     const params = new URLSearchParams(formData);
-    const newUrl = `${url}?${params.toString()}`;
+    const newUrl = `${this.urlValue}?${params.toString()}`;
 
     Turbo.visit(newUrl, { frame: "jobs" });
     history.pushState({}, "", newUrl);

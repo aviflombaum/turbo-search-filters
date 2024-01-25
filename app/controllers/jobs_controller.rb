@@ -3,12 +3,12 @@ class JobsController < ApplicationController
 
   # GET /jobs or /jobs.json
   def index
-    @jobs = Job
+    @jobs = Job.all
     @jobs = @jobs.where(category: params[:category]) if params[:category].present?
     @jobs = @jobs.where(location: params[:location]) if params[:location].present?
     @jobs = @jobs.where(remote: true) if params[:remote].present?
     @jobs = @jobs.where(commitment: params[:commitments]) if params[:commitments].present?
-    @jobs = @jobs.order(created_at: :desc)
+    @jobs = @jobs.order(created_at: :desc).limit(100)
   end
 
   # GET /jobs/1 or /jobs/1.json

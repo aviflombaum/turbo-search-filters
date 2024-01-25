@@ -9,8 +9,8 @@
 #   end
 
 categories = ["Engineering", "Marketing", "Design", "Sales", "Customer Service"]
-locations = ["New York", "San Francisco", "Berlin", "Tokyo", "London", "Paris", "Sydney", "Toronto", "Singapore", "Remote"]
-100.times do
+locations = ["New York", "San Francisco", "Berlin", "Tokyo", "London", "Paris", "Sydney", "Toronto", "Singapore"]
+500000.times do
   Job.create!(
     title: Faker::Job.title,
     description: Faker::Lorem.sentence(word_count: 15),
