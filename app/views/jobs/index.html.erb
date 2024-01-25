@@ -11,8 +11,9 @@
     <% end %>
   </div>
 
-  <div class="flex justify-end mb-5 ml-8" data-controller="filter"  data-filter-url-value="/jobs">
-    <%= form_with(url: jobs_path, method: :get, class: "mt-0") do %>
+  <div class="flex justify-end mb-5 ml-8">
+    <%= form_with(url: jobs_path, method: :get, class: "mt-0",
+          data: {controller: "filter"}) do %>
       <div class="flex flex-col gap-4">
         <div class="flex flex-col justify-end mt-2">
           <%= label_tag :category, 'Category' %>
