@@ -1,0 +1,41 @@
+<h1>Jobs</h1>
+
+<div class="flex items-start justify-between">
+  <div class="w-full">
+    <% if notice.present? %>
+      <p class="inline-block px-3 py-2 mb-5 font-medium text-green-500 rounded-lg bg-green-50" id="notice"><%= notice %></p>
+    <% end %>
+
+    <%= turbo_frame_tag "jobs", class: "min-w-full" do %>
+      <%= render @jobs %>
+    <% end %>
+  </div>
+
+  <div class="flex justify-end mb-5 ml-8" data-controller="filter"  data-filter-url-value="/jobs">
+    <%= form_with(url: jobs_path, method: :get, class: "mt-0") do %>
+      <div class="flex flex-col gap-4">
+        <div class="flex flex-col justify-end mt-2">
+          <%= label_tag :category, 'Category' %>
+          <%= select_tag :category, options_for_select(['Engineering', 'Marketing', 'Design', 'Sales', 'Customer Service'], selected: params[:category]), include_blank: true, class: 'rounded-lg border-gray-300 mt-2',
+            data: {action: "change->filter#submit"} %>
+        </div>
+        <div class="flex flex-col justify-end mt-2">
+          <%= label_tag :location, 'Location' %>
+          <%= select_tag :location, options_for_select(['New York', 'San Francisco', 'Berlin', 'Tokyo', 'London', 'Paris', 'Sydney', 'Toronto', 'Singapore', 'Remote'], selected: params[:location]), include_blank: true, class: 'rounded-lg border-gray-300 mt-2',
+            data: {action: "change->filter#submit"} %>
+        </div>
+        <div class="flex items-center justify-start">
+          <%= check_box_tag :remote, '1', params[:remote].present?, class: 'mr-2',
+            data: {action: "change->filter#submit"} %>
+          <%= label_tag :remote, 'Remote' %>
+        </div>
+        <% Job.commitments.keys.each do |commitment| %>
+          <div class="flex items-center justify-start">
+            <%= check_box_tag "commitments[]", commitment, params[:commitments]&.include?(commitment), id: "commitment_#{commitment}", class: 'mr-2',
+              data: {action: "change->filter#submit"} %>
+            <%= label_tag "commitment_#{commitment}", commitment.humanize %>
+          </div>
+        <% end %>
+      </div>
+    <% end %>
+  </div>
