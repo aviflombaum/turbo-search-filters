@@ -69,6 +69,6 @@ group :development do
   # gem "spring"
 end
 
-gem "faker", "~> 3.2", :group => :development
+gem "faker", "~> 3.3", :group => :development
 
 gem "annotate", "~> 3.2"
